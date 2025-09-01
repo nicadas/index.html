@@ -24,7 +24,7 @@
       align-items: center;
       height: 100vh;
       text-align: center;
-      background-color: rgba(224, 247, 250, 0.9);
+      /* Fundo removido para exibir a imagem original */
     }
 
     .logo {
@@ -223,20 +223,17 @@
       <h2>🧩 Escolha o ser vivo</h2>
       <div class="card-container">
         <div class="card" onclick="selecionar('Borboleta')">
-          <img src="https://cdn.pixabay.com/animation/2024/03/10/13/55/13-55-49-662_512.gif" alt="Borboleta" />
+          <img src="13-55-49-662_512.webp" alt="Borboleta" />
           <p>Borboleta</p>
         </div>
-
         <div class="card" onclick="selecionar('Cogumelo')">
           <img src="f2863f6d9193c017693134c93d911007.gif" alt="Cogumelo" />
           <p>Cogumelo</p>
         </div>
-
         <div class="card" onclick="selecionar('Cacto')">
           <img src="cacto.webp" alt="Cacto" />
           <p>Cacto</p>
         </div>
-
         <div class="card" onclick="selecionar('Girassol')">
           <img src="13-17-20-260_512.webp" alt="Girassol" />
           <p>Girassol</p>
@@ -471,6 +468,7 @@
       document.getElementById("btnVerificar").classList.remove("hidden");
     }
 
+    // Fechar modais ao clicar fora deles
     window.onclick = function(event) {
       if (event.target.classList.contains('modal')) {
         event.target.style.display = "none";
