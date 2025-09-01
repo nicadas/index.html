@@ -1,194 +1,369 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Jogo Educativo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detetives da Natureza – 4º Ano Ciências</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      background: #f0f8ff;
+      background-color: #e0f7fa;
+      color: #004d40;
+      background-image: url('https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
       margin: 0;
       padding: 0;
-    }
-
-    .tela {
-      display: none;
-      padding: 20px;
     }
 
     #tela-inicial {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
       height: 100vh;
+      background-color: rgba(224, 247, 250, 0.9);
+    }
+
+    .logo {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      color: #00695c;
+    }
+
+    .btn-menu {
+      background-color: #00796b;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 10px;
+      font-size: 1.2rem;
+      width: 200px;
+      transition: all 0.3s;
+    }
+
+    .btn-menu:hover {
+      background-color: #004d40;
+      transform: scale(1.05);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: rgba(255,255,255,0.9);
+      border-radius: 12px;
+    }
+
+    h1, h2 {
+      color: #00695c;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .card {
+      width: 180px;
+      cursor: pointer;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid #00796b;
+      transition: transform 0.3s;
+      background-color: #b2dfdb;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
     }
 
     button {
-      margin: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
+      background-color: #00796b;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+
+    select {
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .hidden { display: none; }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 700px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
       cursor: pointer;
     }
 
-    .hidden {
-      display: none;
+    .close:hover {
+      color: black;
     }
 
-    #pontuacao {
+    .pontuacao {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #00796b;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 20px;
       font-weight: bold;
-      margin: 15px;
-      font-size: 18px;
+    }
+
+    .creditos-content {
+      text-align: center;
+    }
+
+    .creditos-img {
+      width: 100%;
     }
 
     #mensagemFinal {
       font-size: 18px;
       margin-top: 20px;
+      font-weight: bold;
     }
 
-    #imagemSer {
-      max-width: 200px;
-      margin: 15px auto;
-      display: none;
+    .image-help {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
+
   <!-- Tela Inicial -->
-  <div id="tela-inicial" class="tela" style="display: flex;">
-    <h1>🌱 Bem-vindo ao Jogo Educativo!</h1>
-    <p>Descubra informações sobre diferentes seres vivos através de pistas.</p>
-    <button onclick="iniciarJogo()">Iniciar Jogo</button>
+  <div id="tela-inicial">
+    <div class="logo">
+      <h1>🌱 Detetives da Natureza</h1>
+      <p>4º Ano - Ciências</p>
+    </div>
+    
+    <button class="btn-menu" onclick="iniciarJogo()">Iniciar Jogo</button>
+    <button class="btn-menu" onclick="abrirModal('manual')">Manual</button>
+    <button class="btn-menu" onclick="abrirModal('creditos')">Créditos</button>
   </div>
 
   <!-- Tela do Jogo -->
-  <div id="jogo" class="tela">
-    <div id="pontuacao">Pontuação: 0</div>
-    <h2>Pistas</h2>
-    <p id="pista"></p>
-    <img id="imagemSer" src="" alt="Imagem do ser vivo">
-    <button id="btnMostrarPista" onclick="mostrarPista()">Mostrar Pista</button>
+  <div id="jogo" class="container hidden">
+    <div class="pontuacao">
+      Pontuação: <span id="pontuacao-atual">0</span>
+      <button onclick="reiniciarJogo()">🔄 Reiniciar Jogo</button>
+    </div>
 
-    <div id="info-section" class="hidden">
+    <h1>🌱 Detetives da Natureza – 4º Ano Ciências</h1>
+
+    <div class="section">
+      <h2>🕵️ Missão</h2>
+      <p>Descubra os segredos dos seres vivos! Identifique suas características e entenda seu papel na natureza.</p>
+    </div>
+
+    <div class="section">
+      <h2>🔍 Escolha uma pista</h2>
+      <button id="btnMostrarPista" onclick="mostrarPista()">Mostrar Pista</button>
+      <p id="pista" style="font-weight: bold; margin-top: 15px; font-size: 1.2rem;"></p>
+    </div>
+
+    <div class="section">
+      <h2>🧩 Escolha o ser vivo</h2>
+      <div class="card-container">
+        <div class="card" onclick="selecionar('Borboleta')">
+          <img src="https://cdn.pixabay.com/animation/2024/03/10/13/55/13-55-49-662_512.gif" alt="Borboleta" />
+          <p>Borboleta</p>
+        </div>
+        <div class="card" onclick="selecionar('Cogumelo')">
+          <img src="https://i.giphy.com/media/3o7TKsQ8UQ4l4LhGz6/giphy.gif" alt="Cogumelo" />
+          <p>Cogumelo</p>
+        </div>
+        <div class="card" onclick="selecionar('Cacto')">
+          <img src="cacto.webp" alt="Cacto" />
+          <p>Cacto</p>
+        </div>
+        <div class="card" onclick="selecionar('Girassol')">
+          <img src="https://media.giphy.com/media/3o7TKS4Raek5gWlLio/giphy.gif" alt="Girassol" />
+          <p>Girassol</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="info-section" class="hidden section">
       <h3>Responda sobre o ser vivo:</h3>
 
       <label>Onde vive?</label>
       <select id="ondeVive">
-        <option value="">-- Selecione --</option>
-        <option value="florestas">Florestas</option>
-        <option value="desertos">Desertos</option>
-        <option value="campos">Campos</option>
-        <option value="solo_umido">Solo úmido</option>
-      </select><br><br>
+        <option value="">Selecione...</option>
+        <option value="florestas">Em florestas</option>
+        <option value="solo_umido">No solo úmido</option>
+        <option value="desertos">Em regiões secas (desertos)</option>
+        <option value="campos">Em campos</option>
+      </select>
 
       <label>Como se alimenta?</label>
       <select id="comoAlimenta">
-        <option value="">-- Selecione --</option>
-        <option value="nectar">Néctar</option>
-        <option value="fotossintese">Fotossíntese</option>
-        <option value="materia_organica">Matéria orgânica</option>
-      </select><br><br>
+        <option value="">Selecione...</option>
+        <option value="nectar">Se alimenta de néctar</option>
+        <option value="fotossintese">Faz fotossíntese</option>
+        <option value="materia_organica">Absorve matéria orgânica</option>
+      </select>
 
       <label>Como se reproduz?</label>
       <select id="comoReproduz">
-        <option value="">-- Selecione --</option>
-        <option value="ovos">Ovos</option>
-        <option value="sementes">Sementes</option>
+        <option value="">Selecione...</option>
+        <option value="ovos">Põe ovos</option>
         <option value="esporos">Esporos</option>
-      </select><br><br>
+        <option value="sementes">Sementes</option>
+      </select>
 
       <label>Qual papel desempenha?</label>
       <select id="papel">
-        <option value="">-- Selecione --</option>
+        <option value="">Selecione...</option>
         <option value="polinizacao">Polinização</option>
         <option value="reciclagem">Reciclagem</option>
         <option value="oxigenio">Produção de oxigênio</option>
-      </select><br><br>
+      </select><br>
 
       <button id="btnVerificar" onclick="verificarRespostas()">Verificar Respostas</button>
       <button id="btnContinuar" class="hidden" onclick="continuarJogo()">Continuar</button>
-      <button id="btnReiniciar" class="hidden" onclick="reiniciarJogo()">Reiniciar Jogo</button>
-      <div id="mensagemFinal"></div>
+      <p id="mensagemFinal"></p>
+    </div>
+  </div>
+
+  <!-- Modal Manual -->
+  <div id="modal-manual" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal('manual')">&times;</span>
+      <h2>Manual do Jogo</h2>
+      <p>Como jogar:</p>
+      <ol>
+        <li>Clique em "Mostrar Pista" para revelar uma dica sobre um ser vivo</li>
+        <li>Selecione o ser vivo correto baseado na pista</li>
+        <li>Preencha as informações sobre onde vive, como se alimenta, como se reproduz e seu papel na natureza</li>
+        <li>Clique em "Verificar Respostas" para saber se você acertou</li>
+        <li>Ganhe pontos por cada resposta correta</li>
+        <li>Complete todas as fases para se tornar um Detetive da Natureza!</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Modal Créditos -->
+  <div id="modal-creditos" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal('creditos')">&times;</span>
+      <div class="creditos-content">
+        <h2>Créditos</h2>
+        <p><strong>Autoria:</strong> Maria Socorro</p>
+        <p><strong>Edição:</strong> Keven William</p>
+        <h3>Apoio e Patrocínio</h3>
+        <img class="creditos-img" src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Exemplo de imagem de créditos">
+      </div>
     </div>
   </div>
 
   <script>
-    let pontosTotais = 0;
-    let pistaAtual = -1;
-    let serEscolhido = "";
-    let pistasUsadas = [];
-
     const seres = [
       {
         nome: "Borboleta",
-        imagem: "borboleta.gif", // salve esse gif na mesma pasta do HTML
         pistas: ["Tenho asas coloridas", "Ajudo na polinização", "Começo como lagarta"],
-        respostas: {
-          ondeVive: "florestas",
-          comoAlimenta: "nectar",
-          comoReproduz: "ovos",
-          papel: "polinizacao"
-        }
+        respostas: {ondeVive:"florestas", comoAlimenta:"nectar", comoReproduz:"ovos", papel:"polinizacao"}
       },
       {
         nome: "Cogumelo",
-        imagem: "cogumelo.gif", // gif do cogumelo
         pistas: ["Cresço em lugares úmidos", "Não faço fotossíntese", "Sou um fungo"],
-        respostas: {
-          ondeVive: "solo_umido",
-          comoAlimenta: "materia_organica",
-          comoReproduz: "esporos",
-          papel: "reciclagem"
-        }
+        respostas: {ondeVive:"solo_umido", comoAlimenta:"materia_organica", comoReproduz:"esporos", papel:"reciclagem"}
       },
       {
         nome: "Cacto",
-        imagem: "cacto.gif",
         pistas: ["Vivo em desertos", "Armazeno água", "Tenho espinhos"],
-        respostas: {
-          ondeVive: "desertos",
-          comoAlimenta: "fotossintese",
-          comoReproduz: "sementes",
-          papel: "oxigenio"
-        }
+        respostas: {ondeVive:"desertos", comoAlimenta:"fotossintese", comoReproduz:"sementes", papel:"oxigenio"}
       },
       {
         nome: "Girassol",
-        imagem: "girassol.gif",
         pistas: ["Sigo o sol", "Sou uma planta amarela", "Produzo sementes"],
-        respostas: {
-          ondeVive: "campos",
-          comoAlimenta: "fotossintese",
-          comoReproduz: "sementes",
-          papel: "oxigenio"
-        }
+        respostas: {ondeVive:"campos", comoAlimenta:"fotossintese", comoReproduz:"sementes", papel:"oxigenio"}
       }
     ];
 
+    let pistaAtual = 0;
+    let serEscolhido = null;
+    let pontosTotais = 0;
+    let usados = [];
+
     function iniciarJogo() {
       document.getElementById("tela-inicial").style.display = "none";
-      document.getElementById("jogo").style.display = "block";
+      document.getElementById("jogo").classList.remove("hidden");
+      atualizarPontuacao();
       escolherSer();
     }
+
+    function abrirModal(tipo) { document.getElementById(`modal-${tipo}`).style.display = "block"; }
+    function fecharModal(tipo) { document.getElementById(`modal-${tipo}`).style.display = "none"; }
 
     function escolherSer() {
       let indice;
       do {
         indice = Math.floor(Math.random() * seres.length);
-      } while (pistasUsadas.includes(indice) && pistasUsadas.length < seres.length);
-
+      } while (usados.includes(indice) && usados.length < seres.length);
       serEscolhido = seres[indice];
-      pistasUsadas.push(indice);
       pistaAtual = 0;
-
+      usados.push(indice);
       document.getElementById("pista").textContent = serEscolhido.pistas[pistaAtual];
-      document.getElementById("imagemSer").src = serEscolhido.imagem;
-      document.getElementById("imagemSer").style.display = "block";
-
       document.getElementById("info-section").classList.add("hidden");
       document.getElementById("mensagemFinal").textContent = "";
-      document.getElementById("btnMostrarPista").disabled = false;
-      document.getElementById("btnReiniciar").classList.add("hidden");
+      document.getElementById("btnVerificar").classList.remove("hidden");
+      document.getElementById("btnContinuar").classList.add("hidden");
     }
 
     function mostrarPista() {
@@ -197,65 +372,70 @@
         document.getElementById("pista").textContent = serEscolhido.pistas[pistaAtual];
       } else {
         document.getElementById("info-section").classList.remove("hidden");
-        document.getElementById("btnMostrarPista").disabled = true;
+      }
+    }
+
+    function selecionar(nome) {
+      if (nome === serEscolhido.nome) {
+        document.getElementById("info-section").classList.remove("hidden");
+        document.getElementById("serVivo").textContent = nome;
+      } else {
+        alert("Escolha incorreta. Tente novamente!");
       }
     }
 
     function verificarRespostas() {
-      const ondeVive = document.getElementById("ondeVive").value;
-      const comoAlimenta = document.getElementById("comoAlimenta").value;
-      const comoReproduz = document.getElementById("comoReproduz").value;
+      const onde = document.getElementById("ondeVive").value;
+      const como = document.getElementById("comoAlimenta").value;
+      const reproduz = document.getElementById("comoReproduz").value;
       const papel = document.getElementById("papel").value;
 
+      if (!onde || !como || !reproduz || !papel) { alert("Preencha todas as informações."); return; }
+
       let pontos = 0;
-      if (ondeVive === serEscolhido.respostas.ondeVive) pontos++;
-      if (comoAlimenta === serEscolhido.respostas.comoAlimenta) pontos++;
-      if (comoReproduz === serEscolhido.respostas.comoReproduz) pontos++;
+      if (onde === serEscolhido.respostas.ondeVive) pontos++;
+      if (como === serEscolhido.respostas.comoAlimenta) pontos++;
+      if (reproduz === serEscolhido.respostas.comoReproduz) pontos++;
       if (papel === serEscolhido.respostas.papel) pontos++;
 
       pontosTotais += pontos;
       atualizarPontuacao();
 
-      if (pontos === 4) {
-        document.getElementById("mensagemFinal").textContent = "🎉 Parabéns! Todas as respostas estão corretas!";
-        document.getElementById("mensagemFinal").style.color = "green";
-      } else {
-        document.getElementById("mensagemFinal").textContent = `Você acertou ${pontos} de 4 respostas. Continue tentando!`;
-        document.getElementById("mensagemFinal").style.color = "red";
-      }
-
+      const msg = pontos === 4 ? "🎉 Todas respostas corretas!" : `❌ Você acertou ${pontos} de 4 respostas.`;
+      document.getElementById("mensagemFinal").textContent = msg;
       document.getElementById("btnVerificar").classList.add("hidden");
       document.getElementById("btnContinuar").classList.remove("hidden");
-      document.getElementById("btnReiniciar").classList.remove("hidden");
     }
 
     function continuarJogo() {
-      document.getElementById("pista").textContent = "";
-      document.getElementById("info-section").classList.add("hidden");
-      document.getElementById("mensagemFinal").textContent = "";
-      document.getElementById("btnMostrarPista").disabled = false;
-      document.getElementById("btnVerificar").classList.remove("hidden");
-      document.getElementById("btnContinuar").classList.add("hidden");
+      if (usados.length === seres.length) { alert("🎉 Parabéns! Você completou todas as fases!"); reiniciarJogo(); return; }
+      document.getElementById("ondeVive").value = "";
+      document.getElementById("comoAlimenta").value = "";
+      document.getElementById("comoReproduz").value = "";
+      document.getElementById("papel").value = "";
       escolherSer();
     }
 
-    function atualizarPontuacao() {
-      document.getElementById("pontuacao").textContent = "Pontuação: " + pontosTotais;
+    function reiniciarJogo() {
+      usados = [];
+      pontosTotais = 0;
+      serEscolhido = null;
+      pistaAtual = 0;
+      atualizarPontuacao();
+      document.getElementById("tela-inicial").style.display = "flex";
+      document.getElementById("jogo").classList.add("hidden");
+      document.getElementById("pista").textContent = "";
+      document.getElementById("info-section").classList.add("hidden");
+      document.getElementById("btnVerificar").classList.remove("hidden");
+      document.getElementById("btnContinuar").classList.add("hidden");
     }
 
-    function reiniciarJogo() {
-      pontosTotais = 0;
-      pistasUsadas = [];
-      pistaAtual = -1;
-      serEscolhido = "";
-      atualizarPontuacao();
+    function atualizarPontuacao() {
+      document.getElementById("pontuacao-atual").textContent = pontosTotais;
+    }
 
-      document.getElementById("tela-inicial").style.display = "flex";
-      document.getElementById("jogo").style.display = "none";
-      document.getElementById("pista").textContent = "";
-      document.getElementById("imagemSer").style.display = "none";
-      document.getElementById("info-section").classList.add("hidden");
-      document.getElementById("mensagemFinal").textContent = "";
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) { event.target.style.display = "none"; }
     }
   </script>
 </body>
