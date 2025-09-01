@@ -212,10 +212,7 @@
   </div>
 
   <div id="jogo" class="container">
-    <div class="pontuacao">
-      Pontuação: <span id="pontuacao-atual">0</span>
-      <button onclick="reiniciarJogo()" style="margin-left:10px;">🔄 Reiniciar</button>
-    </div>
+    <div class="pontuacao">Pontuação: <span id="pontuacao-atual">0</span></div>
 
     <h1>🌱 Detetives da Natureza – 4º Ano Ciências</h1>
 
@@ -234,10 +231,12 @@
       <h2>🧩 Escolha o ser vivo</h2>
       <div class="card-container">
         <div class="card" onclick="selecionar('Borboleta')">
+          <!-- Substitua o src abaixo pelo nome do seu arquivo: 13-55-49-662_512.webp -->
           <img src="https://cdn.pixabay.com/animation/2024/03/10/13/55/13-55-49-662_512.gif" alt="Borboleta" />
           <p>Borboleta</p>
         </div>
         <div class="card" onclick="selecionar('Cogumelo')">
+          <!-- Substitua o src abaixo pelo nome do seu arquivo: f2863f6d9193c017693134c93d911007.gif -->
           <img src="https://media.giphy.com/media/3o7TKsQ8UQ4l4LhGz6/giphy.gif" alt="Cogumelo" />
           <p>Cogumelo</p>
         </div>
@@ -245,6 +244,10 @@
           <img src="https://media.giphy.com/media/3o7TKWpgQSfzR5Q6SY/giphy.gif" alt="Cacto" />
           <p>Cacto</p>
         </div>
+     <div class="card" onclick="selecionar('Cacto')">
+  <img src="cacto.webp" alt="Cacto" />
+  <p>Cacto</p>
+</div>  
         <div class="card" onclick="selecionar('Girassol')">
           <img src="https://media.giphy.com/media/3o7TKS4Raek5gWlLio/giphy.gif" alt="Girassol" />
           <p>Girassol</p>
@@ -256,7 +259,11 @@
         <p>Para usar suas próprias imagens:</p>
         <ol>
           <li>Certifique-se de que os arquivos estão na mesma pasta que o HTML</li>
-          <li>Substitua os URLs nas tags &lt;img&gt; acima pelos nomes dos seus arquivos</li>
+          <li>Substitua os URLs nas tags &lt;img&gt; acima pelos nomes dos seus arquivos:</li>
+          <ul>
+            <li>Borboleta: <code>13-55-49-662_512.webp</code></li>
+            <li>Cogumelo: <code>f2863f6d9193c017693134c93d911007.gif</code></li>
+          </ul>
           <li>Verifique se os nomes dos arquivos estão exatamente iguais, incluindo a extensão</li>
         </ol>
       </div>
@@ -332,7 +339,8 @@
         <p><strong>Edição:</strong> Keven William</p>
 
         <h3>Apoio e Patrocínio</h3>
-        <img class="creditos-img" src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Exemplo de imagem de créditos">
+        <!-- Imagem de créditos -->
+        <img class="creditos-img" src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Exemplo de imagem de créditos">
       </div>
     </div>
   </div>
@@ -506,26 +514,11 @@
       pistasUsadas = [];
       pontosTotais = 0;
       atualizarPontuacao();
-
-      // Limpar seleção e pistas
+      document.getElementById("btnMostrarPista").disabled = false;
       document.getElementById("pista").textContent = "";
       document.getElementById("info-section").classList.add("hidden");
       document.getElementById("btnContinuar").classList.add("hidden");
       document.getElementById("btnVerificar").classList.remove("hidden");
-      document.getElementById("btnMostrarPista").disabled = false;
-      
-      serEscolhido = "";
-      pistaAtual = -1;
-      
-      // Voltar para a tela inicial
-      document.getElementById("jogo").style.display = "none";
-      document.getElementById("tela-inicial").style.display = "flex";
-
-      // Limpar campos do formulário
-      document.getElementById("ondeVive").value = "";
-      document.getElementById("comoAlimenta").value = "";
-      document.getElementById("comoReproduz").value = "";
-      document.getElementById("papel").value = "";
     }
 
     // Fechar modais ao clicar fora deles
