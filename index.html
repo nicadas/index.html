@@ -45,6 +45,12 @@
       font-size: 18px;
       margin-top: 20px;
     }
+
+    #imagemSer {
+      max-width: 200px;
+      margin: 15px auto;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -60,6 +66,7 @@
     <div id="pontuacao">Pontuação: 0</div>
     <h2>Pistas</h2>
     <p id="pista"></p>
+    <img id="imagemSer" src="" alt="Imagem do ser vivo">
     <button id="btnMostrarPista" onclick="mostrarPista()">Mostrar Pista</button>
 
     <div id="info-section" class="hidden">
@@ -100,6 +107,7 @@
 
       <button id="btnVerificar" onclick="verificarRespostas()">Verificar Respostas</button>
       <button id="btnContinuar" class="hidden" onclick="continuarJogo()">Continuar</button>
+      <button id="btnReiniciar" class="hidden" onclick="reiniciarJogo()">Reiniciar Jogo</button>
       <div id="mensagemFinal"></div>
     </div>
   </div>
@@ -113,6 +121,7 @@
     const seres = [
       {
         nome: "Borboleta",
+        imagem: "borboleta.gif", // salve esse gif na mesma pasta do HTML
         pistas: ["Tenho asas coloridas", "Ajudo na polinização", "Começo como lagarta"],
         respostas: {
           ondeVive: "florestas",
@@ -123,6 +132,7 @@
       },
       {
         nome: "Cogumelo",
+        imagem: "cogumelo.gif", // gif do cogumelo
         pistas: ["Cresço em lugares úmidos", "Não faço fotossíntese", "Sou um fungo"],
         respostas: {
           ondeVive: "solo_umido",
@@ -133,6 +143,7 @@
       },
       {
         nome: "Cacto",
+        imagem: "cacto.gif",
         pistas: ["Vivo em desertos", "Armazeno água", "Tenho espinhos"],
         respostas: {
           ondeVive: "desertos",
@@ -143,6 +154,7 @@
       },
       {
         nome: "Girassol",
+        imagem: "girassol.gif",
         pistas: ["Sigo o sol", "Sou uma planta amarela", "Produzo sementes"],
         respostas: {
           ondeVive: "campos",
@@ -170,9 +182,13 @@
       pistaAtual = 0;
 
       document.getElementById("pista").textContent = serEscolhido.pistas[pistaAtual];
+      document.getElementById("imagemSer").src = serEscolhido.imagem;
+      document.getElementById("imagemSer").style.display = "block";
+
       document.getElementById("info-section").classList.add("hidden");
       document.getElementById("mensagemFinal").textContent = "";
       document.getElementById("btnMostrarPista").disabled = false;
+      document.getElementById("btnReiniciar").classList.add("hidden");
     }
 
     function mostrarPista() {
@@ -210,6 +226,7 @@
 
       document.getElementById("btnVerificar").classList.add("hidden");
       document.getElementById("btnContinuar").classList.remove("hidden");
+      document.getElementById("btnReiniciar").classList.remove("hidden");
     }
 
     function continuarJogo() {
@@ -236,6 +253,7 @@
       document.getElementById("tela-inicial").style.display = "flex";
       document.getElementById("jogo").style.display = "none";
       document.getElementById("pista").textContent = "";
+      document.getElementById("imagemSer").style.display = "none";
       document.getElementById("info-section").classList.add("hidden");
       document.getElementById("mensagemFinal").textContent = "";
     }
