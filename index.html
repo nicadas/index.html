@@ -98,6 +98,7 @@
       height: 150px;
       object-fit: cover;
       border-radius: 8px;
+      border: 2px solid #00796b;
     }
 
     .hidden {
@@ -185,6 +186,15 @@
       width: 100%;
       margin-top: 20px;
       border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    .image-help {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -220,14 +230,16 @@
     <div class="section">
       <h2>🧩 Escolha o ser vivo</h2>
       <div class="card-container">
-<div class="card" onclick="selecionar('Borboleta')">
-  <img src="13-55-49-662_512.webp" alt="Borboleta" />
-  <p>Borboleta</p>
-</div>
-<div class="card" onclick="selecionar('Cogumelo')">
-  <img src="f2863f6d9193c017693134c93d911007.gif" alt="Cogumelo" />
-  <p>Cogumelo</p>
-</div>
+        <div class="card" onclick="selecionar('Borboleta')">
+          <!-- Substitua o src abaixo pelo nome do seu arquivo: 13-55-49-662_512.webp -->
+          <img src="https://cdn.pixabay.com/animation/2024/03/10/13/55/13-55-49-662_512.gif" alt="Borboleta" />
+          <p>Borboleta</p>
+        </div>
+        <div class="card" onclick="selecionar('Cogumelo')">
+          <!-- Substitua o src abaixo pelo nome do seu arquivo: f2863f6d9193c017693134c93d911007.gif -->
+          <img src="https://media.giphy.com/media/3o7TKsQ8UQ4l4LhGz6/giphy.gif" alt="Cogumelo" />
+          <p>Cogumelo</p>
+        </div>
         <div class="card" onclick="selecionar('Cacto')">
           <img src="https://media.giphy.com/media/3o7TKWpgQSfzR5Q6SY/giphy.gif" alt="Cacto" />
           <p>Cacto</p>
@@ -236,6 +248,20 @@
           <img src="https://media.giphy.com/media/3o7TKS4Raek5gWlLio/giphy.gif" alt="Girassol" />
           <p>Girassol</p>
         </div>
+      </div>
+      
+      <div class="image-help">
+        <h3>⚠️ Seus GIFs não estão aparecendo?</h3>
+        <p>Para usar suas próprias imagens:</p>
+        <ol>
+          <li>Certifique-se de que os arquivos estão na mesma pasta que o HTML</li>
+          <li>Substitua os URLs nas tags &lt;img&gt; acima pelos nomes dos seus arquivos:</li>
+          <ul>
+            <li>Borboleta: <code>13-55-49-662_512.webp</code></li>
+            <li>Cogumelo: <code>f2863f6d9193c017693134c93d911007.gif</code></li>
+          </ul>
+          <li>Verifique se os nomes dos arquivos estão exatamente iguais, incluindo a extensão</li>
+        </ol>
       </div>
     </div>
 
@@ -308,10 +334,9 @@
         <p><strong>Autoria:</strong> Maria Socorro</p>
         <p><strong>Edição:</strong> Keven William</p>
         
-        
         <h3>Apoio e Patrocínio</h3>
         <!-- Imagem de créditos -->
-<img src="Obama.png" alt="Imagem Obama">
+        <img class="creditos-img" src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Exemplo de imagem de créditos">
       </div>
     </div>
   </div>
@@ -500,8 +525,4 @@
     }
   </script>
 </body>
-
 </html>
-
-
-
