@@ -188,14 +188,6 @@
       border: 1px solid #ddd;
       border-radius: 8px;
     }
-
-    .image-help {
-      background-color: #f5f5f5;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 20px;
-      font-size: 0.9rem;
-    }
   </style>
 </head>
 <body>
@@ -249,20 +241,6 @@
           <img src="https://media.giphy.com/media/3o7TKS4Raek5gWlLio/giphy.gif" alt="Girassol" />
           <p>Girassol</p>
         </div>
-      </div>
-
-      <div class="image-help">
-        <h3>⚠️ Seus GIFs não estão aparecendo?</h3>
-        <p>Para usar suas próprias imagens:</p>
-        <ol>
-          <li>Certifique-se de que os arquivos estão na mesma pasta que o HTML</li>
-          <li>Substitua os URLs nas tags &lt;img&gt; acima pelos nomes dos seus arquivos:</li>
-          <ul>
-            <li>Borboleta: <code>13-55-49-662_512.webp</code></li>
-            <li>Cogumelo: <code>f2863f6d9193c017693134c93d911007.gif</code></li>
-          </ul>
-          <li>Verifique se os nomes dos arquivos estão exatamente iguais, incluindo a extensão</li>
-        </ol>
       </div>
     </div>
 
@@ -517,7 +495,6 @@
       document.getElementById("btnVerificar").classList.remove("hidden");
     }
 
-    // Fechar modais ao clicar fora deles
     window.onclick = function(event) {
       if (event.target.classList.contains('modal')) {
         event.target.style.display = "none";
