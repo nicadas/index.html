@@ -24,13 +24,14 @@
       align-items: center;
       height: 100vh;
       text-align: center;
-      /* Fundo removido para exibir a imagem original */
+      gap: 20px; /* espaço entre título e botões */
     }
 
-    .logo {
+    .logo h1 {
       font-size: 3rem;
-      margin-bottom: 2rem;
       color: #00695c;
+      margin: 0; /* remove margem extra */
+      padding: 0;
     }
 
     .btn-menu {
@@ -195,7 +196,6 @@
   <div id="tela-inicial">
     <div class="logo">
       <h1>🌱 Detetives da Natureza</h1>
-    
     </div>
 
     <button class="btn-menu" onclick="iniciarJogo()">Iniciar Jogo</button>
@@ -468,7 +468,6 @@
       document.getElementById("btnVerificar").classList.remove("hidden");
     }
 
-    // Fechar modais ao clicar fora deles
     window.onclick = function(event) {
       if (event.target.classList.contains('modal')) {
         event.target.style.display = "none";
