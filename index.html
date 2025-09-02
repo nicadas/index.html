@@ -21,17 +21,16 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start; /* Alinha conteúdo à esquerda */
       height: 100vh;
-      text-align: center;
-      gap: 20px; /* espaço entre título e botões */
+      text-align: left;
+      padding-left: 50px; /* Distância do lado esquerdo */
     }
 
     .logo h1 {
-      font-size: 3rem;
+      font-size: 3rem; /* mantém tamanho grande */
       color: #00695c;
-      margin: 0; /* remove margem extra */
-      padding: 0;
+      margin: 0 0 20px 0; /* Espaço embaixo do título */
     }
 
     .btn-menu {
@@ -41,7 +40,7 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      margin: 10px;
+      margin: 10px 0;
       font-size: 1.2rem;
       width: 200px;
       transition: all 0.3s;
@@ -468,6 +467,7 @@
       document.getElementById("btnVerificar").classList.remove("hidden");
     }
 
+    // Fechar modais ao clicar fora deles
     window.onclick = function(event) {
       if (event.target.classList.contains('modal')) {
         event.target.style.display = "none";
